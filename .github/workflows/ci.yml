@@ -18,7 +18,7 @@ jobs:
       - name: Change root directory!
         run: cd ./nodejs
       - name: Installing dependencies!
-        run: npm ci
+        run: npm install
       - name: Test unit tests!
         run: npm test
       - name: Check for start!
