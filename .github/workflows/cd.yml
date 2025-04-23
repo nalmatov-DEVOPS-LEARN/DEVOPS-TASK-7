@@ -1,0 +1,29 @@
+name: TASK 7 CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  nodejs:
+    runs-on: ubuntu-latest
+    container:
+      image: docker
+    defaults:
+      run:
+        working-directory: ./nodejs
+
+    steps:
+      - uses: actions:/checkout@v3
+        with:
+          node_version: 16
+
+      - name: Deployment
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} && chmod +x ./ci/* && ./ci/build_run.sh
+
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python
