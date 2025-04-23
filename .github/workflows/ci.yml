@@ -1,0 +1,39 @@
+name: TASK 7 CI/CD
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  nodejs:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          node_version: 16
+      - name: Change root directory!
+        run: cd/nodejs
+      - name: Installing dependencies!
+        run: npm ci
+      - name: Test unit tests!
+        run: npm test
+      - name: Check for start!
+        run: npm start
+
+  python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          python_version: 3.11
+      - name: Change root directory!
+        run: cd/python
+      - name: Installing dependencies!
+        run: pip install --upgrade pip && pip install -r requirements.txt
+      - name: Check for start!
+        run: python3 index.py
