@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:16
+    defaults:
+      run:
+        working-directory: ./nodejs
 
     steps:
       - uses: actions/checkout@v3
         with:
           node_version: 16
-      - name: Change root directory!
-        run: cd ./nodejs
       - name: Installing dependencies!
         run: npm install
       - name: Test unit tests!
@@ -26,13 +27,15 @@ jobs:
 
   python:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           python_version: 3.11
-      - name: Change root directory!
-        run: cd ./python
       - name: Installing dependencies!
         run: pip install --upgrade pip && pip install -r requirements.txt
       - name: Check for start!
