@@ -20,7 +20,11 @@ jobs:
           node_version: 16
 
       - name: Deployment
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} && chmod +x ./ci/* && ./ci/build_run.sh
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            chmod +x ~/ci/* &&
+            ~/ci/build_run.sh
+          "
 
   python:
     runs-on: ubuntu-latest
