@@ -1,0 +1,16 @@
+services:
+  nodejs:
+    build: ./nodejs
+    image: hello-world-nodejs
+    container_name: hello-world-nodejs-container
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  python:
+    build: ./python
+    image: hello-world-python
+    container_name: hello-world-python-container
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
