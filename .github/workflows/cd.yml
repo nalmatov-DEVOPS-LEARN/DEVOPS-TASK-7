@@ -18,7 +18,11 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       - name: Deployment
         run: |
-          scp -o StrictHostKeyChecking=no -o LogLevel=quiet -P ${{ secrets.SSH_PORT }} -r ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
+          mkdir -p ./hello-world
+          cp ./nodejs ./hello-world
+          cp ./python ./hello-world
+          cp ./docker-compose.yml ./hello-world
+          scp -o StrictHostKeyChecking=no -o LogLevel=quiet -P ${{ secrets.SSH_PORT }} -r ./hello-world ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
       - name: Restart server
         run: |
           ssh -o StrictHostKeyChecking=no -o LogLevel=quiet -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
