@@ -22,7 +22,7 @@ jobs:
           cp -r ./nodejs ./hello-world
           cp -r ./python ./hello-world
           cp -r ./docker-compose.yml ./hello-world
-          scp -o StrictHostKeyChecking=no -o LogLevel=quiet -P ${{ secrets.SSH_PORT }} -r ./hello-world ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
+          scp -o StrictHostKeyChecking=no -o LogLevel=quiet -P ${{ secrets.SSH_PORT }} -r ./hello-world/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
       - name: Restart server
         run: |
           ssh -o StrictHostKeyChecking=no -o LogLevel=quiet -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
