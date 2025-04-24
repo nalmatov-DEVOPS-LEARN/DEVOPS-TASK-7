@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  nodejs:
+  nodejs-python:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,9 +24,3 @@ jobs:
             cd ~/hello-world
             docker compose up -d
           "
-
-  python:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./python
