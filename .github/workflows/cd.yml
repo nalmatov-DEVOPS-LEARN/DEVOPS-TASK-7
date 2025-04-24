@@ -20,7 +20,10 @@ jobs:
           scp -o StrictHostKeyChecking=no . -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
       - name: Restart server
         run: |
-          ssh -o StrictHostKeyChecking=no
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd ~/hello-world
+            docker compose up -d
+          "
 
   python:
     runs-on: ubuntu-latest
