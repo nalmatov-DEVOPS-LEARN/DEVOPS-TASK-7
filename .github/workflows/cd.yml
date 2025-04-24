@@ -15,6 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Get SSH key and set permissions
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       - name: Deployment
         run: |
           scp -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} -r ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
