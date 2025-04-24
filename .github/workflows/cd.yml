@@ -17,7 +17,7 @@ jobs:
 
       - name: Deployment
         run: |
-          scp -o StrictHostKeyChecking=no . -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
+          scp -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} -r ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/hello-world/
       - name: Restart server
         run: |
           ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
