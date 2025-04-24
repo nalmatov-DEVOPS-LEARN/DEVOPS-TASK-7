@@ -28,5 +28,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -o LogLevel=quiet -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
             mkdir -p ~/hello-world
             cd ~/hello-world
-            docker compose up -d
+            docker-compose up --build -d
           "
